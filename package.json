@@ -1,0 +1,25 @@
+{
+  "name": "cs_340_project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simatt99/cs_340_project.git"
+  },
+  "author": "Matt Simoes and Abi Whittle",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/simatt99/cs_340_project/issues"
+  },
+  "homepage": "https://github.com/simatt99/cs_340_project#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-handlebars": "^7.1.2",
+    "forever": "^4.0.3",
+    "mysql": "^2.18.1"
+  }
+}
