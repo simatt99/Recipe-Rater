@@ -23,10 +23,16 @@ PORT = 4239;
 /*
     ROUTES
 */
-app.get('/', function(req, res)                 // This is the basic syntax for what is called a 'route'
-    {
-        res.render('index')      
-    }) 
+app.get('/', function(req, res) {
+    let query = "SELECT * FROM Recipes;";
+    db.pool.query(query, function(error, rows, fields) {
+        if (error) {
+            res.status(500).send('Server error');
+            return;
+        }
+        res.render('Recipes', {data: rows});
+    });
+});
                                   
 app.get('/Reviews', function(req, res) {
         let query = "SELECT * FROM Reviews;";
