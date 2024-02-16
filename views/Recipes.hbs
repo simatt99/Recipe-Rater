@@ -18,13 +18,15 @@
                 {{@key}}
             </th>
             {{/each}}
+            <th>Update</th>
+            <th>Delete</th>            
         </tr>
     </thead>
 
     {{!-- Body section --}}
     <tbody>
 
-        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        
         {{#each data}}
         <tr>
             <td>{{this.recipeID}}</td>
@@ -35,8 +37,43 @@
             <td>{{this.instructionList}}</td>
             <td>{{this.cookTime}}</td>
             <td>{{this.servingSize}}</td>
-
+            <td><button class="update-btn" data-id="{{this.id}}" onclick="updateRecord({{this.id}})">Update</button></td>
+            <td><button class="delete-btn" data-id="{{this.id}}" onclick="deleteRecord({{this.id}})">Delete</button></td>
         </tr>
         {{/each}}
     </tbody>
 </table>
+
+{{!-- 2 # Citation for the following html:
+2 # Date: 2/15/24
+3 # Adapted from Node.js - Node.js - Step 5 - Adding New Data
+4 # used the base template but changed to fit my database
+5 # Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data --}}
+{{!-- Form to add a record to the table  --}}
+<h2>Add Recipe</h2>
+<p>To add a new recipe, please enter their information below and click 'Submit'!</p>
+<form id="add-recipe">
+
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name">
+
+    <label for="description">Description:</label>
+    <textarea name="description" id="description"></textarea>
+
+    <label for="userID">User ID:</label>
+    <input type="number" name="userID" id="userID">
+
+    <label for="datePosted">Date Posted:</label>
+    <input type="date" name="datePosted" id="datePosted">
+
+    <label for="instructionList">Instruction List:</label>
+    <textarea name="instructionList" id="instructionList"></textarea>
+
+    <label for="cookTime">Cook Time:</label>
+    <input type="time" name="cookTime" id="cookTime">
+
+    <label for="servingSize">Serving Size:</label>
+    <input type="number" name="servingSize" id="servingSize">
+
+    <input type="submit">
+</form>

@@ -18,20 +18,50 @@
                 {{@key}}
             </th>
             {{/each}}
+            <th>Update</th>
+            <th>Delete</th>            
         </tr>
     </thead>
 
     {{!-- Body section --}}
     <tbody>
 
-        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+      
         {{#each data}}
         <tr>
             <td>{{this.ingredientID}}</td>
             <td>{{this.name}}</td>
             <td>{{this.description}}</td>
             <td>{{this.allergen}}</td>
+            <td><button class="update-btn" data-id="{{this.id}}" onclick="updateRecord({{this.id}})">Update</button></td>
+            <td><button class="delete-btn" data-id="{{this.id}}" onclick="deleteRecord({{this.id}})">Delete</button></td>            
         </tr>
         {{/each}}
     </tbody>
 </table>
+
+{{!-- 2 # Citation for the following html:
+2 # Date: 2/15/24
+3 # Adapted from Node.js - Node.js - Step 5 - Adding New Data
+4 # used the base template but changed to fit my database
+5 # Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data --}}
+{{!-- Form to add a record to the table  --}}
+<h2>Add Ingredient</h2>
+<p>To add a new ingredients, please enter their information below and click 'Submit'!</p>
+<form id="add-ingredient">
+
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name">
+
+    <label for="description">Description:</label>
+    <textarea name="description" id="description"></textarea>
+
+    <label for="allergen">Allergen (0 for no, 1 for yes):</label>
+    <input type="number" name="allergen" id="allergen" min="0" max="1">
+
+    <input type="submit">
+</form>
+
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+{{!-- <script src="./js/add_person.js"></script> --}}

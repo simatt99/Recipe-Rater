@@ -19,6 +19,8 @@
                 {{@key}}
             </th>
             {{/each}}
+            <th>Update</th>
+            <th>Delete</th>            
         </tr>
     </thead>
 
@@ -33,7 +35,34 @@
             <td>{{this.lastName}}</td>
             <td>{{this.email}}</td>
             <td>{{this.joinDate}}</td>
+            <td><button class="update-btn" data-id="{{this.id}}" onclick="updateRecord({{this.id}})">Update</button></td>
+            <td><button class="delete-btn" data-id="{{this.id}}" onclick="deleteRecord({{this.id}})">Delete</button></td>            
         </tr>
         {{/each}}
     </tbody>
 </table>
+
+{{!-- 2 # Citation for the following html:
+2 # Date: 2/15/24
+3 # Adapted from Node.js - Node.js - Step 5 - Adding New Data
+4 # used the base template but changed to fit my database
+5 # Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data --}}
+{{!-- Form to add a record to the table  --}}
+<h2>Add User</h2>
+<p>To add a new category, please enter their information below and click 'Submit'!</p>
+<form id="add-user">
+
+    <label for="firstName">First Name:</label>
+    <input type="text" name="firstName" id="firstName">
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" name="lastName" id="lastName">
+
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email">
+
+    <label for="joinDate">Join Date:</label>
+    <input type="date" name="joinDate" id="joinDate">
+
+    <input type="submit">
+</form>

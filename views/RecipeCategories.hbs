@@ -19,18 +19,22 @@
                 {{@key}}
             </th>
             {{/each}}
+            <th>Update</th>
+            <th>Delete</th>
         </tr>
     </thead>
 
     {{!-- Body section --}}
     <tbody>
 
-        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        
         {{#each data}}
         <tr>
             <td>{{recipeCategoryID}}</td>
             <td>{{this.categoryID}}</td>
             <td>{{this.recipeID}}</td>
+            <td><button class="update-btn" data-id="{{this.id}}" onclick="updateRecord({{this.id}})">Update</button></td>
+            <td><button class="delete-btn" data-id="{{this.id}}" onclick="deleteRecord({{this.id}})">Delete</button></td>
         </tr>
         {{/each}}
     </tbody>

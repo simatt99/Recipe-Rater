@@ -14,7 +14,10 @@ var db = require('./database/db-connector.js');
 var exphbs  = require('express-handlebars');
 app.engine('.hbs', engine({extname: '.hbs'}));
 app.set('view engine', '.hbs');
-PORT        = 4239; 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
+PORT = 4239; 
 
 
 /*

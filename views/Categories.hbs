@@ -5,7 +5,7 @@
 5 # Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%204%20-%20Dynamically%20Displaying%20Data --}}
 
 {{!-- Create a table --}}
-<table>
+<table id="Categories-table">
 
     {{!-- Header section --}}
     <thead>
@@ -18,19 +18,42 @@
                 {{@key}}
             </th>
             {{/each}}
+            <th>Update</th>
+            <th>Delete</th>
         </tr>
     </thead>
 
     {{!-- Body section --}}
     <tbody>
 
-        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        
         {{#each data}}
         <tr>
             <td>{{this.categoryID}}</td>
             <td>{{this.name}}</td>
+            <td><button class="update-btn" data-id="{{this.id}}" onclick="updateRecord({{this.id}})">Update</button></td>
+            <td><button class="delete-btn" data-id="{{this.id}}" onclick="deleteRecord({{this.id}})">Delete</button></td>            
 
         </tr>
         {{/each}}
     </tbody>
 </table>
+
+{{!-- 2 # Citation for the following html:
+2 # Date: 2/15/24
+3 # Adapted from Node.js - Node.js - Step 5 - Adding New Data
+4 # used the base template but changed to fit my database
+5 # Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data --}}
+{{!-- Form to add a record to the table  --}}
+<h2>Add categories!</h2>
+<p>To add a new category, please enter their information below and click 'Submit'!</p>
+<form id="add-category">
+    
+    <label for="categoryName">Category Name:</label>
+    <input type="text" name="name" id="categoryName">
+    
+    <input type="submit">
+</form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+{{!-- <script src="./js/add_person.js"></script> --}}

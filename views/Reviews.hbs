@@ -19,6 +19,8 @@
                 {{@key}}
             </th>
             {{/each}}
+            <th>Update</th>
+            <th>Delete</th>            
         </tr>
     </thead>
 
@@ -34,7 +36,31 @@
             <td>{{this.datePosted}}</td>
             <td>{{this.rating}}</td>
             <td>{{this.comment}}</td>
+            <td><button class="update-btn" data-id="{{this.id}}" onclick="updateRecord({{this.id}})">Update</button></td>
+            <td><button class="delete-btn" data-id="{{this.id}}" onclick="deleteRecord({{this.id}})">Delete</button></td>            
         </tr>
         {{/each}}
     </tbody>
 </table>
+
+<h2>Add Review</h2>
+<p>To add a new Reviews, please enter its information below and click 'Submit'!</p>
+<form id="add-review">
+
+    <label for="recipeID">Recipe ID:</label>
+    <input type="number" name="recipeID" id="recipeID">
+
+    <label for="userID">User ID:</label>
+    <input type="number" name="userID" id="userID">
+
+    <label for="datePosted">Date Posted:</label>
+    <input type="date" name="datePosted" id="datePosted">
+
+    <label for="rating">Rating:</label>
+    <input type="number" name="rating" id="rating">
+
+    <label for="comment">Comment:</label>
+    <textarea name="comment" id="comment"></textarea>
+
+    <input type="submit">
+</form>
