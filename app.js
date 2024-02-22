@@ -59,26 +59,33 @@ app.get('/Reviews', function(req, res) {
                     res.render('Reviews', {data: rows, Recipes: rows2, Users: rows3});
                 });
             });
+        }); 
+    });
+    
+   
+app.get('/Recipes', function(req, res) {
+        let query = "SELECT * FROM Recipes;";
+        let query2 = "SELECT userID, CONCAT(firstName, ' ', lastName) AS UserName, email, joinDate FROM Users;";
+        db.pool.query(query, function(error, rows, fields) {
+            if (error) {
+                res.status(500).send('Server error');
+                return;
+            }
+            db.pool.query(query2, function(error, rows2, fields) {
+                if (error) {
+                    res.status(500).send('Server error');
+                    return;
+                }
+                res.render('Recipes', {data: rows, Users: rows2});
+            });
         });
         // db.pool.query(query, function(error, rows, fields) {
         //     if (error) {
         //         res.status(500).send('Server error');
         //         return;
         //     }
-        //     res.render('Reviews', {data: rows});
+        //     res.render('Recipes', {data: rows});
         // });
-    });
-    
-   
-app.get('/Recipes', function(req, res) {
-        let query = "SELECT * FROM Recipes;";
-        db.pool.query(query, function(error, rows, fields) {
-            if (error) {
-                res.status(500).send('Server error');
-                return;
-            }
-            res.render('Recipes', {data: rows});
-        });
     });
     
 app.get('/Users', function(req, res) {

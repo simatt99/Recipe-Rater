@@ -17,9 +17,7 @@
             <th>
                 {{@key}}
             </th>
-            {{/each}}
-            <th>Update</th>
-            <th>Delete</th>            
+            {{/each}}        
         </tr>
     </thead>
 
@@ -37,8 +35,6 @@
             <td>{{this.instructionList}}</td>
             <td>{{this.cookTime}}</td>
             <td>{{this.servingSize}}</td>
-            <td><button class="update-btn" data-id="{{this.id}}" onclick="updateRecord({{this.id}})">Update</button></td>
-            <td><button class="delete-btn" data-id="{{this.id}}" onclick="deleteRecord({{this.id}})">Delete</button></td>
         </tr>
         {{/each}}
     </tbody>
@@ -61,8 +57,12 @@
     <label for="description">*Description:</label>
     <textarea name="description" id="description"></textarea>
 
-    <label for="userID">User ID:</label>
-    <input type="number" name="userID" id="userID">
+    <select name="add-User-Recipes" id="add-Users-Recipes">
+        <option value="">Select a User</option>
+        {{#each Users}}
+        <option value="{{this.userID}}">{{this.UserName}}</option>
+        {{/each}}
+    </select>
 
     <label for="datePosted">Date Posted:</label>
     <input type="date" name="datePosted" id="datePosted">
@@ -77,4 +77,58 @@
     <input type="number" name="servingSize" id="servingSize">
 
     <input type="submit">
+</form>
+
+<h2>Edit Recipe</h2>
+<p>To edit a recipe, please enter the information below and click 'Submit'!</p>
+<form id="add-recipe">
+
+    <select name="edit-RecipeID-Recipes" id="edit-RecipeIDs-Recipes">
+        <option value="">Select a Recipe</option>
+        {{#each data}}
+        <option value="{{this.recipeID}}">{{this.name}}</option>
+        {{/each}}
+    </select>
+
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name">
+
+    <label for="description">*Description:</label>
+    <textarea name="description" id="description"></textarea>
+
+    <select name="edit-User-Recipes" id="edit-Users-Recipes">
+        <option value="">Select a User</option>
+        {{#each Users}}
+        <option value="{{this.userID}}">{{this.UserName}}</option>
+        {{/each}}
+    </select>
+
+    <label for="datePosted">Date Posted:</label>
+    <input type="date" name="datePosted" id="datePosted">
+
+    <label for="instructionList">Instruction List:</label>
+    <textarea name="instructionList" id="instructionList"></textarea>
+
+    <label for="cookTime">Cook Time:</label>
+    <input type="time" name="cookTime" id="cookTime">
+
+    <label for="servingSize">Serving Size:</label>
+    <input type="number" name="servingSize" id="servingSize">
+
+    <input type="submit">
+</form>
+
+<h2>Delete Review</h2>
+<p>To Delete a Recipe, please select its information below and click 'Delete'!</p>
+<form id="delete-recipe">
+
+    <select name="recipe-ID-deleter" id="recipe-IDs-delete">
+        <option value="">Select a Recipe</option>
+        {{#each data}}
+        <option value="{{this.recipeID}}">{{this.recipeID}}</option>
+        {{/each}}
+    </select>
+
+    <td><button class="delete-btn" data-id="delete-recipe-button">Delete</button></td>  
+
 </form>
