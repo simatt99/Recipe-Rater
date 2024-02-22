@@ -48,12 +48,13 @@
 {{!-- Form to add a record to the table  --}}
 <h2>Add Ingredient</h2>
 <p>To add a new ingredients, please enter their information below and click 'Submit'!</p>
+<p>Inputs with a * next to them are nullable and not required</p>
 <form id="add-ingredient">
 
     <label for="name">Name:</label>
     <input type="text" name="name" id="name">
 
-    <label for="description">Description:</label>
+    <label for="description">*Description:</label>
     <textarea name="description" id="description"></textarea>
 
     <label for="allergen">Allergen (0 for no, 1 for yes):</label>
