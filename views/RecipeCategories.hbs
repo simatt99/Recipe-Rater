@@ -30,9 +30,12 @@
         
         {{#each data}}
         <tr>
-            <td>{{recipeCategoryID}}</td>
+            {{!-- <td>{{recipeCategoryID}}</td>
             <td>{{this.categoryID}}</td>
-            <td>{{this.recipeID}}</td>
+            <td>{{this.recipeID}}</td> --}}
+            <td>{{recipeCategoryID}}</td>
+            <td>{{this.RecipeName}}</td>
+            <td>{{this.CategoryName}}</td>
             <td><button class="update-btn" data-id="{{this.id}}" onclick="updateRecord({{this.id}})">Update</button></td>
             <td><button class="delete-btn" data-id="{{this.id}}" onclick="deleteRecord({{this.id}})">Delete</button></td>
         </tr>

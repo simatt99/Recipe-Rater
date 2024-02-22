@@ -17,7 +17,7 @@ app.set('view engine', '.hbs');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
-PORT = 4239; 
+PORT = 1234; 
 
 
 /*
@@ -69,23 +69,25 @@ app.get('/Users', function(req, res) {
     });
     
 app.get('/RecipeCategories', function(req, res) {
-    let query = "SELECT * FROM RecipeCategories;";
+    let query = "SELECT rc.recipeCategoryID, r.name AS RecipeName, c.name AS CategoryName FROM RecipeCategories rc JOIN Recipes r ON rc.recipeID = r.recipeID JOIN Categories c ON rc.categoryID = c.categoryID;";
     db.pool.query(query, function(error, rows, fields) {
         if (error) {
             res.status(500).send('Server error');
             return;
         }
+        // console.log(rows)
         res.render('RecipeCategories', {data: rows});
         });
     });
     
 app.get('/RecipeIngredients', function(req, res) {
-    let query = "SELECT * FROM RecipeIngredients;";
+    let query = "SELECT ri.recipeIngredientID, r.name AS RecipeName, i.name AS IngredientName FROM RecipeIngredients ri JOIN Recipes r ON ri.recipeID = r.recipeID JOIN Ingredients i ON ri.ingredientID = i.ingredientID;";
     db.pool.query(query, function(error, rows, fields) {
         if (error) {
             res.status(500).send('Server error');
             return;
         }
+        // console.log(rows)
         res.render('RecipeIngredients', {data: rows});
         });
     });
