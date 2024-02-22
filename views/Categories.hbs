@@ -18,8 +18,6 @@
                 {{@key}}
             </th>
             {{/each}}
-            <th>Update</th>
-            <th>Delete</th>
         </tr>
     </thead>
 
@@ -30,9 +28,7 @@
         {{#each data}}
         <tr>
             <td>{{this.categoryID}}</td>
-            <td>{{this.name}}</td>
-            <td><button class="update-btn" data-id="{{this.id}}" onclick="updateRecord({{this.id}})">Update</button></td>
-            <td><button class="delete-btn" data-id="{{this.id}}" onclick="deleteRecord({{this.id}})">Delete</button></td>            
+            <td>{{this.name}}</td>        
 
         </tr>
         {{/each}}
@@ -55,5 +51,33 @@
     <input type="submit">
 </form>
 
-{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
-{{!-- <script src="./js/add_person.js"></script> --}}
+<h2>Edit categories!</h2>
+<p>To edit a category, please enter their information below and click 'Submit'!</p>
+<form id="edit-category">
+
+    <select name="Category-ID-edit" id="Category-ID-edit">
+        <option value="">Select a Review</option>
+        {{#each data}}
+        <option value="{{this.categoryID}}">{{this.categoryID}}</option>
+        {{/each}}
+    </select>
+    
+    <label for="categoryName">Category Name:</label>
+    <input type="text" name="name" id="categoryName">
+    
+    <input type="submit">
+</form>
+<h2>Delete Categories</h2>
+<p>To Delete a category, please select its information below and click 'Delete'!</p>
+<form id="delete-Category">
+
+    <select name="recipe-ID-deleter" id="recipe-IDs-delete">
+        <option value="">Select a Category</option>
+        {{#each data}}
+        <option value="{{this.categoryID}}">{{this.categoryID}}</option>
+        {{/each}}
+    </select>
+
+    <td><button class="delete-btn" data-id="delete-review-button">Delete</button></td>  
+
+</form>
