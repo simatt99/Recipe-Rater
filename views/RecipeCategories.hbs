@@ -19,8 +19,6 @@
                 {{@key}}
             </th>
             {{/each}}
-            <th>Update</th>
-            <th>Delete</th>
         </tr>
     </thead>
 
@@ -30,15 +28,59 @@
         
         {{#each data}}
         <tr>
-            {{!-- <td>{{recipeCategoryID}}</td>
-            <td>{{this.categoryID}}</td>
-            <td>{{this.recipeID}}</td> --}}
-            <td>{{recipeCategoryID}}</td>
+            <td>{{this.recipeCategoryID}}</td>
             <td>{{this.RecipeName}}</td>
             <td>{{this.CategoryName}}</td>
-            <td><button class="update-btn" data-id="{{this.id}}" onclick="updateRecord({{this.id}})">Update</button></td>
-            <td><button class="delete-btn" data-id="{{this.id}}" onclick="deleteRecord({{this.id}})">Delete</button></td>
         </tr>
         {{/each}}
     </tbody>
 </table>
+
+<h2>Add recipe category</h2>
+<p>To add new recipe category, please enter its information below and click 'Submit'!</p>
+<form id="add-recipeCategory">
+
+
+    <label for="NewRecipeCategory">Recipe Name:</label>
+    <input type="text" name="NewRecipeCategory" id="NewRecipeCategoryInput">
+
+    <label for="newCategoryName">Category Name:</label>
+    <input type="text" name="newCategoryName" id="newCategoryNameInput">
+
+    <input type="submit">
+</form>
+
+<h2>Edit a category</h2>
+<p>To edit categories, please enter its information below and click 'Submit'!</p>
+<form id="edit-recipeIngredient">
+
+    <select name="recipeIngredient-ID-edit" id="recipeIngredient-IDs-edit">
+        <option value="">Select a Recipe Category</option>
+        {{#each data}}
+        <option value="{{this.recipeCategoryID}}">{{this.recipeCategoryID}}</option>
+        {{/each}}
+    </select>
+
+    <label for="NewRecipeIngredientList">Recipe:</label>
+    <input type="text" name="NewRecipeIngredientList" id="NewRecipeIngredientList">
+
+    <label for="newIngredientName">Ingredient:</label>
+    <input type="text" name="newIngredientName" id="newIngredientName">
+
+    <input type="submit">
+</form>
+
+<h2>Delete a category</h2>
+<p>To Delete a category, please select its information below and click 'Delete'!</p>
+<form id="delete-review">
+
+    <select name="recipeIngredient-ID-edit" id="recipeIngredient-IDs-edit">
+        <option value="">Select a Recipe Category</option>
+        {{#each data}}
+        <option value="{{this.recipeCategoryID}}">{{this.recipeCategoryID}}</option>
+        {{/each}}
+    </select>
+
+    <td><button class="delete-btn" data-id="delete-review-button">Delete</button></td>  
+
+</form>
