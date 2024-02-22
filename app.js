@@ -35,12 +35,13 @@ app.get('/', function(req, res) {
 });
                                   
 app.get('/Reviews', function(req, res) {
-        let query = "SELECT * FROM Reviews;";
+        let query = "SELECT rv.reviewID, r.name AS RecipeName, CONCAT(u.firstName, ' ', u.lastName) AS UserName, rv.datePosted, rv.rating, rv.comment FROM Reviews rv JOIN Recipes r ON rv.recipeID = r.recipeID JOIN Users u ON rv.userID = u.userID;";
         db.pool.query(query, function(error, rows, fields) {
             if (error) {
                 res.status(500).send('Server error');
                 return;
             }
+            console.log(rows)
             res.render('Reviews', {data: rows});
         });
     });
