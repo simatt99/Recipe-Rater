@@ -17,9 +17,7 @@
             <th>
                 {{@key}}
             </th>
-            {{/each}}
-            <th>Update</th>
-            <th>Delete</th>            
+            {{/each}}          
         </tr>
     </thead>
 
@@ -29,15 +27,59 @@
        
         {{#each data}}
         <tr>
-            {{!-- <td>{{this.recipeIngredientID}}</td>
-            <td>{{this.ingredientID}}</td>
-            <td>{{this.recipeID}}</td> --}}
             <td>{{this.recipeIngredientID}}</td>
             <td>{{this.RecipeName}}</td>
             <td>{{this.IngredientName}}</td>
-            <td><button class="update-btn" data-id="{{this.id}}" onclick="updateRecord({{this.id}})">Update</button></td>
-            <td><button class="delete-btn" data-id="{{this.id}}" onclick="deleteRecord({{this.id}})">Delete</button></td>
         </tr>
         {{/each}}
     </tbody>
 </table>
+
+<h2>Add recipe ingredients</h2>
+<p>To add new ingredients, please enter its information below and click 'Submit'!</p>
+<form id="add-recipeIngredient">
+
+
+    <label for="NewRecipeIngredientList">Recipe:</label>
+    <input type="text" name="NewRecipeIngredientList" id="NewRecipeIngredientList">
+
+    <label for="newIngredientName">Ingredient:</label>
+    <input type="text" name="newIngredientName" id="newIngredientName">
+
+    <input type="submit">
+</form>
+
+<h2>Edit recipe ingredients</h2>
+<p>To edit ingredients, please enter its information below and click 'Submit'!</p>
+<form id="edit-recipeIngredient">
+
+    <select name="recipeIngredient-ID-edit" id="recipeIngredient-IDs-edit">
+        <option value="">Select a Recipe Ingredient</option>
+        {{#each data}}
+        <option value="{{this.recipeIngredientID}}">{{this.recipeIngredientID}}</option>
+        {{/each}}
+    </select>
+
+    <label for="NewRecipeIngredientList">Recipe:</label>
+    <input type="text" name="NewRecipeIngredientList" id="NewRecipeIngredientList">
+
+    <label for="newIngredientName">Ingredient:</label>
+    <input type="text" name="newIngredientName" id="newIngredientName">
+
+    <input type="submit">
+</form>
+
+<h2>Delete recipe ingredients</h2>
+<p>To Delete a ingredient, please select its information below and click 'Delete'!</p>
+<form id="delete-review">
+
+    <select name="recipeIngredient-ID-deleter" id="recipeIngredient-IDs-delete">
+        <option value="">Select a Recipe Ingredient</option>
+        {{#each data}}
+        <option value="{{this.recipeIngredientID}}">{{this.recipeIngredientID}}</option>
+        {{/each}}
+    </select>
+
+    <td><button class="delete-btn" data-id="delete-review-button">Delete</button></td>  
+
+</form>
