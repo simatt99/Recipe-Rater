@@ -17,9 +17,7 @@
             <th>
                 {{@key}}
             </th>
-            {{/each}}
-            <th>Update</th>
-            <th>Delete</th>            
+            {{/each}}          
         </tr>
     </thead>
 
@@ -32,9 +30,7 @@
             <td>{{this.ingredientID}}</td>
             <td>{{this.name}}</td>
             <td>{{this.description}}</td>
-            <td>{{this.allergen}}</td>
-            <td><button class="update-btn" data-id="{{this.id}}" onclick="updateRecord({{this.id}})">Update</button></td>
-            <td><button class="delete-btn" data-id="{{this.id}}" onclick="deleteRecord({{this.id}})">Delete</button></td>            
+            <td>{{this.allergen}}</td>       
         </tr>
         {{/each}}
     </tbody>
@@ -63,6 +59,42 @@
     <input type="submit">
 </form>
 
+<h2>Edit Ingredient</h2>
+<p>To edit ingredients, please enter the information below and click 'Submit'!</p>
+<p>Inputs with a * next to them are nullable and not required</p>
+<form id="edit-ingredient">
 
-{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
-{{!-- <script src="./js/add_person.js"></script> --}}
+    <select name="ingredient-ID" id="ingredient-IDs">
+        <option value="">Select a ingredient</option>
+        {{#each data}}
+        <option value="{{this.ingredientID}}">{{this.ingredientID}}</option>
+        {{/each}}
+    </select>
+
+    <label for="ingredient-name">Name:</label>
+    <input type="text" name="ingredient-name" id="edit-ingredient-name">
+
+    <label for="edit-ingredient-description">*Description:</label>
+    <textarea name="edit-ingredient-description" id="edit-ingredient-description"></textarea>
+
+    <label for="edit-ingredient-allergen">Allergen (0 for no, 1 for yes):</label>
+    <input type="number" name="edit-ingredient-allergen" id="edit-ingredient-allergen" min="0" max="1">
+
+    <input type="submit">
+</form>
+
+<h2>Delete Ingredients</h2>
+<p>To Delete a Ingredient, please select its information below and click 'Delete'!</p>
+<form id="delete-ingredient">
+
+    <select name="ingredient-ID" id="ingredient-IDs">
+        <option value="">Select a ingredient</option>
+        {{#each data}}
+        <option value="{{this.ingredientID}}">{{this.ingredientID}}</option>
+        {{/each}}
+    </select>
+
+    <td><button class="delete-btn" data-id="delete-review-button">Delete</button></td>  
+
+</form>
+
