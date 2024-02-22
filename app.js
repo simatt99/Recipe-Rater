@@ -36,14 +36,37 @@ app.get('/', function(req, res) {
                                   
 app.get('/Reviews', function(req, res) {
         let query = "SELECT rv.reviewID, r.name AS RecipeName, CONCAT(u.firstName, ' ', u.lastName) AS UserName, rv.datePosted, rv.rating, rv.comment FROM Reviews rv JOIN Recipes r ON rv.recipeID = r.recipeID JOIN Users u ON rv.userID = u.userID;";
+        let query2 = "SELECT * FROM Recipes;";
+        let query3 = "SELECT userID, CONCAT(firstName, ' ', lastName) AS UserName, email, joinDate FROM Users;";
         db.pool.query(query, function(error, rows, fields) {
             if (error) {
                 res.status(500).send('Server error');
                 return;
             }
-            console.log(rows)
-            res.render('Reviews', {data: rows});
+            db.pool.query(query2, function(error, rows2, fields) {
+                if (error) {
+                    res.status(500).send('Server error');
+                    return;
+                }
+                db.pool.query(query3, function(error, rows3, fields) {
+                    if (error) {
+                        res.status(500).send('Server error');
+                        return;
+                    }
+                    console.log(rows);
+                    console.log(rows2);
+                    console.log(rows3);
+                    res.render('Reviews', {data: rows, Recipes: rows2, Users: rows3});
+                });
+            });
         });
+        // db.pool.query(query, function(error, rows, fields) {
+        //     if (error) {
+        //         res.status(500).send('Server error');
+        //         return;
+        //     }
+        //     res.render('Reviews', {data: rows});
+        // });
     });
     
    

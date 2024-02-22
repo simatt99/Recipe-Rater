@@ -18,9 +18,7 @@
             <th>
                 {{@key}}
             </th>
-            {{/each}}
-            <th>Update</th>
-            <th>Delete</th>            
+            {{/each}}          
         </tr>
     </thead>
 
@@ -35,9 +33,7 @@
             <td>{{this.UserName}}</td>
             <td>{{this.datePosted}}</td>
             <td>{{this.rating}}</td>
-            <td>{{this.comment}}</td>
-            <td><button class="update-btn" data-id="{{this.id}}" onclick="updateRecord({{this.id}})">Update</button></td>
-            <td><button class="delete-btn" data-id="{{this.id}}" onclick="deleteRecord({{this.id}})">Delete</button></td>            
+            <td>{{this.comment}}</td>          
         </tr>
         {{/each}}
     </tbody>
@@ -47,11 +43,20 @@
 <p>To add a new Reviews, please enter its information below and click 'Submit'!</p>
 <form id="add-review">
 
-    <label for="recipeID">Recipe ID:</label>
-    <input type="number" name="recipeID" id="recipeID">
 
-    <label for="userID">User ID:</label>
-    <input type="number" name="userID" id="userID">
+    <select name="input-Recipe" id="input-Recipes">
+        <option value="">Select a Recipe</option>
+        {{#each Recipes}}
+        <option value="{{this.recipeID}}">{{this.name}}</option>
+        {{/each}}
+    </select>
+
+    <select name="input-User" id="input-Users">
+        <option value="">Select a User</option>
+        {{#each Users}}
+        <option value="{{this.userID}}">{{this.UserName}}</option>
+        {{/each}}
+    </select>
 
     <label for="datePosted">Date Posted:</label>
     <input type="date" name="datePosted" id="datePosted">
@@ -63,4 +68,48 @@
     <textarea name="comment" id="comment"></textarea>
 
     <input type="submit">
+</form>
+
+<h2>Edit Review</h2>
+<p>To Edit a Review, please enter its information below and click 'Edit'!</p>
+<form id="edit-review">
+
+    <select name="recipe-ID" id="recipe-IDs">
+        <option value="">Select a Review</option>
+        {{#each data}}
+        <option value="{{this.reviewID}}">{{this.reviewID}}</option>
+        {{/each}}
+    </select>
+
+    <select name="edit-User" id="edit-Users">
+        <option value="">Select a User</option>
+        {{#each Users}}
+        <option value="{{this.userID}}">{{this.UserName}}</option>
+        {{/each}}
+    </select>
+
+    <label for="datePosted">Date Posted:</label>
+    <input type="date" name="datePosted" id="datePosted">
+
+    <label for="rating">Rating:</label>
+    <input type="number" name="rating" id="rating">
+
+    <label for="comment">Comment:</label>
+    <textarea name="comment" id="comment"></textarea>
+
+    <input type="submit">
+</form>
+<h2>Delete Review</h2>
+<p>To Delete a Review, please select its information below and click 'Delete'!</p>
+<form id="delete-review">
+
+    <select name="recipe-ID-deleter" id="recipe-IDs-delete">
+        <option value="">Select a Review</option>
+        {{#each data}}
+        <option value="{{this.reviewID}}">{{this.reviewID}}</option>
+        {{/each}}
+    </select>
+
+    <td><button class="delete-btn" data-id="delete-review-button">Delete</button></td>  
+
 </form>
