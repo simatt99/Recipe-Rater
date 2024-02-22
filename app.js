@@ -53,9 +53,6 @@ app.get('/Reviews', function(req, res) {
                         res.status(500).send('Server error');
                         return;
                     }
-                    console.log(rows);
-                    console.log(rows2);
-                    console.log(rows3);
                     res.render('Reviews', {data: rows, Recipes: rows2, Users: rows3});
                 });
             });
@@ -79,13 +76,6 @@ app.get('/Recipes', function(req, res) {
                 res.render('Recipes', {data: rows, Users: rows2});
             });
         });
-        // db.pool.query(query, function(error, rows, fields) {
-        //     if (error) {
-        //         res.status(500).send('Server error');
-        //         return;
-        //     }
-        //     res.render('Recipes', {data: rows});
-        // });
     });
     
 app.get('/Users', function(req, res) {

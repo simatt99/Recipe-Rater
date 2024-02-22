@@ -18,9 +18,7 @@
             <th>
                 {{@key}}
             </th>
-            {{/each}}
-            <th>Update</th>
-            <th>Delete</th>            
+            {{/each}}          
         </tr>
     </thead>
 
@@ -34,9 +32,7 @@
             <td>{{this.firstName}}</td>
             <td>{{this.lastName}}</td>
             <td>{{this.email}}</td>
-            <td>{{this.joinDate}}</td>
-            <td><button class="update-btn" data-id="{{this.id}}" onclick="updateRecord({{this.id}})">Update</button></td>
-            <td><button class="delete-btn" data-id="{{this.id}}" onclick="deleteRecord({{this.id}})">Delete</button></td>            
+            <td>{{this.joinDate}}</td>           
         </tr>
         {{/each}}
     </tbody>
@@ -49,7 +45,7 @@
 5 # Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data --}}
 {{!-- Form to add a record to the table  --}}
 <h2>Add User</h2>
-<p>To add a new category, please enter their information below and click 'Submit'!</p>
+<p>To add a new User, please enter their information below and click 'Submit'!</p>
 <form id="add-user">
 
     <label for="firstName">First Name:</label>
@@ -65,4 +61,46 @@
     <input type="date" name="joinDate" id="joinDate">
 
     <input type="submit">
+</form>
+
+<h2>Edit User</h2>
+<p>To edit a user, please enter their information below and click 'Submit'!</p>
+<form id="edit-user">
+
+    <select name="recipe-ID" id="recipe-IDs">
+        <option value="">Select a User</option>
+        {{#each data}}
+        <option value="{{this.userID}}">{{this.userID}}</option>
+        {{/each}}
+    </select>
+
+    <label for="firstName">First Name:</label>
+    <input type="text" name="firstName" id="firstName">
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" name="lastName" id="lastName">
+
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email">
+
+    <label for="joinDate">Join Date:</label>
+    <input type="date" name="joinDate" id="joinDate">
+
+    <input type="submit">
+</form>
+
+</form>
+<h2>Delete User</h2>
+<p>To Delete a User, please select their ID below and click 'Delete'!</p>
+<form id="delete-review">
+
+    <select name="recipe-ID-deleter" id="recipe-IDs-delete">
+        <option value="">UserID</option>
+        {{#each data}}
+        <option value="{{this.userID}}">{{this.userID}}</option>
+        {{/each}}
+    </select>
+
+    <td><button class="delete-btn" data-id="delete-review-button">Delete</button></td>  
+
 </form>
