@@ -29,7 +29,11 @@
         <tr>
             <td>{{this.recipeID}}</td>
             <td>{{this.name}}</td>
-            <td>{{this.description}}</td>
+            {{if this.description}}
+                <td>{{this.description}}</td>
+            {{else}}
+                <td>NULL</td>
+            {{/if}}
             <td>{{this.userID}}</td>
             <td>{{this.datePosted}}</td>
             <td>{{this.instructionList}}</td>

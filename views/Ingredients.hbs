@@ -24,12 +24,15 @@
     {{!-- Body section --}}
     <tbody>
 
-      
         {{#each data}}
         <tr>
             <td>{{this.ingredientID}}</td>
             <td>{{this.name}}</td>
-            <td>{{this.description}}</td>
+            {{#if this.description}}
+                <td>{{this.description}}</td>
+            {{else}}
+                <td>NULL</td>
+            {{/if}}
             <td>{{this.allergen}}</td>       
         </tr>
         {{/each}}
