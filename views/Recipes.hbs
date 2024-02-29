@@ -4,14 +4,19 @@
 4 # used the base template but changed to fit my database
 5 # Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%204%20-%20Dynamically%20Displaying%20Data --}}
 
-{{!-- Create a table --}}
-<table>
+{{!-- Data: recipeID, na,e, description, userID, datePosted, instructionList, cookTime, servingSize --}}
 
-    {{!-- Header section --}}
+<div class="container-fluid">
+
+<br>
+
+<h1>Recipes Page</h1>
+
+<br>
+
+<div>
+<table id="recipes-table">
     <thead>
-
-        {{!-- For just the first row, we print each key of the row object as a header cell so we
-        know what each column means when the page renders --}}
         <tr>
             {{#each data.[0]}}
             <th>
@@ -21,118 +26,154 @@
         </tr>
     </thead>
 
-    {{!-- Body section --}}
     <tbody>
-
-        
         {{#each data}}
-        <tr>
-            <td>{{this.recipeID}}</td>
-            <td>{{this.name}}</td>
-            {{#if this.description}}
-                <td>{{this.description}}</td>
+        <tr data-value={{this.[Recipe ID]}}>
+            <td>{{this.[Recipe ID]}}</td>
+            <td>{{this.[Recipe]}}</td>
+            {{#if this.[Description]}}
+                <td>{{this.[Description]}}</td>
             {{else}}
                 <td>NULL</td>
             {{/if}}
-            <td>{{this.userID}}</td>
-            <td>{{this.datePosted}}</td>
-            <td>{{this.instructionList}}</td>
-            <td>{{this.cookTime}}</td>
-            <td>{{this.servingSize}}</td>
+            <td>{{this.[Author]}}</td>
+            <td>{{this.[Date Posted]}}</td>
+            <td>{{this.[Instruction List]}}</td>
+            <td>{{this.[Cook Time]}}</td>
+            <td>{{this.[Serving Size]}}</td>
         </tr>
         {{/each}}
     </tbody>
 </table>
+</div>
+
+<br>
 
 {{!-- 2 # Citation for the following html:
 2 # Date: 2/15/24
 3 # Adapted from Node.js - Node.js - Step 5 - Adding New Data
 4 # used the base template but changed to fit my database
 5 # Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data --}}
-{{!-- Form to add a record to the table  --}}
+
+<div>
 <h2>Add Recipe</h2>
-<p>To add a new recipe, please enter their information below and click 'Submit'!</p>
+<p>To add a new recipe, please enter the information below and click 'Add'!</p>
 <p>Inputs with a * next to them are nullable and not required</p>
-<form id="add-recipe">
 
-    <label for="name">Name:</label>
-    <input type="text" name="name" id="name">
+<form id="post-recipe-form-ajax">
+    <label for="post-name">Name: </label>
+    <input type="text" name="post-name" id="post-recipe-name">
 
-    <label for="description">*Description:</label>
-    <textarea name="description" id="description"></textarea>
+    <label for="post-description">*Description: </label>
+    <textarea name="post-description" id="post-recipe-description"></textarea>
 
-    <select name="add-User-Recipes" id="add-Users-Recipes">
-        <option value="">Select a User</option>
-        {{#each Users}}
-        <option value="{{this.userID}}">{{this.UserName}}</option>
+    <label for="post-select-user">Author: </label>
+    <select name="post-select-user" id="post-recipe-user">
+        <option value="">Select an Author</option>
+        {{#each users}}
+        <option value="{{this.userID}}">{{this.[Author]}}</option>
         {{/each}}
     </select>
 
-    <label for="datePosted">Date Posted:</label>
-    <input type="date" name="datePosted" id="datePosted">
+    <label for="post-datePosted">Date Posted: </label>
+    <input type="date" name="post-datePosted" id="post-recipe-datePosted">
 
-    <label for="instructionList">Instruction List:</label>
-    <textarea name="instructionList" id="instructionList"></textarea>
+    <label for="post-instructionList">Instruction List: </label>
+    <textarea name="post-instructionList" id="post-recipe-instructionList"></textarea>
 
-    <label for="cookTime">Cook Time:</label>
-    <input type="time" name="cookTime" id="cookTime">
+    <label for="post-cookTime">Cook Time: </label>
+    <input type="time" name="post-cookTime" id="post-recipe-cookTime">
 
-    <label for="servingSize">Serving Size:</label>
-    <input type="number" name="servingSize" id="servingSize">
+    <label for="post-servingSize">Serving Size: </label>
+    <input type="number" name="post-servingSize" id="post-recipe-servingSize" min="0" max="99">
 
-    <input type="submit">
+    <button id="post-recipe-submit">Add</button>
 </form>
+</div>
 
+<br>
+
+<div>
 <h2>Edit Recipe</h2>
-<p>To edit a recipe, please enter the information below and click 'Submit'!</p>
-<form id="add-recipe">
+<p>To edit a recipe, please enter the information below and click 'Edit'!</p>
 
-    <select name="edit-RecipeID-Recipes" id="edit-RecipeIDs-Recipes">
+<form id="put-recipe-form-ajax">
+    <label for="put-select-id">Recipe: </label>
+    <select name="put-select-id" id="put-recipe-id">
         <option value="">Select a Recipe</option>
         {{#each data}}
-        <option value="{{this.recipeID}}">{{this.name}}</option>
+        <option value="{{this.[Recipe ID]}}">{{this.[Recipe]}}</option>
         {{/each}}
     </select>
 
-    <label for="name">Name:</label>
-    <input type="text" name="name" id="name">
+    <label for="put-name">Name: </label>
+    <input type="text" name="put-name" id="put-recipe-name">
 
-    <label for="description">*Description:</label>
-    <textarea name="description" id="description"></textarea>
+    <label for="put-description">*Description: </label>
+    <textarea name="put-description" id="put-recipe-description"></textarea>
 
-    <select name="edit-User-Recipes" id="edit-Users-Recipes">
-        <option value="">Select a User</option>
-        {{#each Users}}
-        <option value="{{this.userID}}">{{this.UserName}}</option>
+    <label for="put-select-user">Author: </label>
+    <select name="put-select-user" id="put-recipe-user">
+        <option value="">Select an Author</option>
+        {{#each users}}
+        <option value="{{this.userID}}">{{this.[Author]}}</option>
         {{/each}}
     </select>
 
-    <label for="datePosted">Date Posted:</label>
-    <input type="date" name="datePosted" id="datePosted">
+    <label for="put-datePosted">Date Posted: </label>
+    <input type="date" name="put-datePosted" id="put-recipe-datePosted">
 
-    <label for="instructionList">Instruction List:</label>
-    <textarea name="instructionList" id="instructionList"></textarea>
+    <label for="put-instructionList">Instruction List: </label>
+    <textarea name="put-instructionList" id="put-recipe-instructionList"></textarea>
 
-    <label for="cookTime">Cook Time:</label>
-    <input type="time" name="cookTime" id="cookTime">
+    <label for="put-cookTime">Cook Time: </label>
+    <input type="time" name="put-cookTime" id="put-recipe-cookTime">
 
-    <label for="servingSize">Serving Size:</label>
-    <input type="number" name="servingSize" id="servingSize">
+    <label for="put-servingSize">Serving Size: </label>
+    <input type="number" name="put-servingSize" id="put-recipe-servingSize" min="0" max="99">
 
-    <input type="submit">
+    <button id="put-recipe-submit">Edit</button>
 </form>
+</div>
 
-<h2>Delete Review</h2>
-<p>To Delete a Recipe, please select its information below and click 'Delete'!</p>
+<br>
+
+<div>
+<h2>Delete Recipe</h2>
+<p>To delete a recipe, please enter the information below and click 'Delete'!</p>
+
 <form id="delete-recipe">
-
-    <select name="recipe-ID-deleter" id="recipe-IDs-delete">
+    <label for="delete-select-id">Recipe: </label>
+    <select name="delete-select-id" id="delete-recipe-id">
         <option value="">Select a Recipe</option>
         {{#each data}}
-        <option value="{{this.recipeID}}">{{this.recipeID}}</option>
+        <option value="{{this.[Recipe ID]}}">{{this.[Recipe]}}</option>
         {{/each}}
     </select>
 
-    <td><button class="delete-btn" data-id="delete-recipe-button">Delete</button></td>  
-
+ <button id="delete-recipe-submit">Delete</button>
 </form>
+</div>
+
+<br>
+
+<div>
+<h2>Search Recipes</h2>
+<p>To search for a recipe, please enter the information below and click 'Search'!</p>
+
+<form id="search-recipe-form-ajax">
+    <label for="search-name">Name: </label>
+    <input type="text" name="search-name" id="search-recipe-name">
+
+    <button id="search-recipe-submit">Search</button>
+    <button id="search-recipe-reset">Reset</button></a>
+</form>
+</div>
+
+<br>
+<br>
+<br>
+
+<script src="/js/recipe.js" type="text/javascript"></script>
+
+</div>

@@ -4,15 +4,19 @@
 4 # used the base template but changed to fit my database
 5 # Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%204%20-%20Dynamically%20Displaying%20Data --}}
 
+{{!-- Data: reviewID, recipeID, userID, datePosted, rating, comment --}}
 
-{{!-- Create a table --}}
-<table>
+<div class="container-fluid">
 
-    {{!-- Header section --}}
+<br>
+
+<h1>Reviews Page</h1>
+
+<br>
+
+<div>
+<table id="reviews-table">
     <thead>
-
-        {{!-- For just the first row, we print each key of the row object as a header cell so we
-        know what each column means when the page renders --}}
         <tr>
             {{#each data.[0]}}
             <th>
@@ -22,94 +26,147 @@
         </tr>
     </thead>
 
-    {{!-- Body section --}}
     <tbody>
-
-        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
         {{#each data}}
-        <tr>
-            <td>{{this.reviewID}}</td>
-            <td>{{this.RecipeName}}</td>
-            <td>{{this.UserName}}</td>
-            <td>{{this.datePosted}}</td>
-            <td>{{this.rating}}</td>
-            <td>{{this.comment}}</td>          
+        <tr data-value={{this.[Review ID]}}>
+            <td>{{this.[Review ID]}}</td>
+            <td>{{this.[Recipe Name]}}</td>
+            <td>{{this.[Author]}}</td>
+            <td>{{this.[Date Posted]}}</td>
+            <td>{{this.[Rating]}}</td>
+            <td>{{this.[Comment]}}</td>          
         </tr>
         {{/each}}
     </tbody>
 </table>
+</div>
 
+<br>
+
+{{!-- 2 # Citation for the following html:
+2 # Date: 2/15/24
+3 # Adapted from Node.js - Node.js - Step 5 - Adding New Data
+4 # used the base template but changed to fit my database
+5 # Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data --}}
+
+<div>
 <h2>Add Review</h2>
-<p>To add a new Reviews, please enter its information below and click 'Submit'!</p>
-<form id="add-review">
+<p>To add a new review, please enter the information below and click 'Add'!</p>
+<p>Inputs with a * next to them are nullable and not required</p>
 
-
-    <select name="input-Recipe" id="input-Recipes">
+<form id="post-review-form-ajax">
+    <label for="post-select-recipe">Recipe: </label>
+    <select name="post-select-recipe" id="post-review-recipe">
         <option value="">Select a Recipe</option>
-        {{#each Recipes}}
+        {{#each recipes}}
         <option value="{{this.recipeID}}">{{this.name}}</option>
         {{/each}}
     </select>
 
-    <select name="input-User" id="input-Users">
-        <option value="">Select a User</option>
-        {{#each Users}}
-        <option value="{{this.userID}}">{{this.UserName}}</option>
+    <label for="post-select-user">Author: </label>
+    <select name="post-select-user" id="post-review-user">
+        <option value="">Select an Author</option>
+        {{#each users}}
+        <option value="{{this.userID}}">{{this.[Author]}}</option>
         {{/each}}
     </select>
 
-    <label for="datePosted">Date Posted:</label>
-    <input type="date" name="datePosted" id="datePosted">
+    <label for="post-datePosted">Date Posted: </label>
+    <input type="date" name="post-datePosted" id="post-review-datePosted">
 
-    <label for="rating">Rating:</label>
-    <input type="number" name="rating" id="rating">
+    <label for="post-rating">Rating: </label>
+    <input type="number" name="post-rating" id="post-review-rating" min="0" max="10">
 
-    <label for="comment">Comment:</label>
-    <textarea name="comment" id="comment"></textarea>
+    <label for="post-comment">*Comment: </label>
+    <textarea name="post-comment" id="post-review-comment"></textarea>
 
-    <input type="submit">
+    <button id="post-review-submit">Add</button>
 </form>
+</div>
 
+<br>
+
+<div>
 <h2>Edit Review</h2>
-<p>To Edit a Review, please enter its information below and click 'Edit'!</p>
-<form id="edit-review">
+<p>To edit a review, please enter the information below and click 'Edit'!</p>
+<p>Inputs with a * next to them are nullable and not required</p>
 
-    <select name="recipe-ID" id="recipe-IDs">
+<form id="put-review-form-ajax">
+    <label for="put-select-id">Review: </label>
+    <select name="put-select-id" id="put-review-id">
         <option value="">Select a Review</option>
         {{#each data}}
-        <option value="{{this.reviewID}}">{{this.reviewID}}</option>
+        <option value="{{this.[Review ID]}}">{{this.[Review ID]}}</option>
         {{/each}}
     </select>
 
-    <select name="edit-User" id="edit-Users">
-        <option value="">Select a User</option>
-        {{#each Users}}
-        <option value="{{this.userID}}">{{this.UserName}}</option>
+    <label for="put-select-recipe">Recipe: </label>
+    <select name="put-select-recipe" id="put-review-recipe">
+        <option value="">Select a Recipe</option>
+        {{#each recipes}}
+        <option value="{{this.recipeID}}">{{this.name}}</option>
         {{/each}}
     </select>
 
-    <label for="datePosted">Date Posted:</label>
-    <input type="date" name="datePosted" id="datePosted">
+    <label for="put-select-user">Author: </label>
+    <select name="put-select-user" id="put-review-user">
+        <option value="">Select an Author</option>
+        {{#each users}}
+        <option value="{{this.userID}}">{{this.[Author]}}</option>
+        {{/each}}
+    </select>
 
-    <label for="rating">Rating:</label>
-    <input type="number" name="rating" id="rating">
+    <label for="put-datePosted">Date Posted: </label>
+    <input type="date" name="put-datePosted" id="put-review-datePosted">
 
-    <label for="comment">Comment:</label>
-    <textarea name="comment" id="comment"></textarea>
+    <label for="put-rating">Rating: </label>
+    <input type="number" name="put-rating" id="put-review-rating" min="0" max="10">
 
-    <input type="submit">
+    <label for="put-comment">*Comment: </label>
+    <textarea name="put-comment" id="put-review-comment"></textarea>
+
+    <button id="put-review-submit">Edit</button>
 </form>
+</div>
+
+<br>
+
+<div>
 <h2>Delete Review</h2>
-<p>To Delete a Review, please select its information below and click 'Delete'!</p>
-<form id="delete-review">
+<p>To delete a review, please enter the information below and click 'Delete'!</p>
 
-    <select name="recipe-ID-deleter" id="recipe-IDs-delete">
+<form id="delete-review-form-ajax">
+    <label for="delete-select-id">Review: </label>
+    <select name="delete-select-id" id="delete-review-id">
         <option value="">Select a Review</option>
         {{#each data}}
-        <option value="{{this.reviewID}}">{{this.reviewID}}</option>
+        <option value="{{this.[Review ID]}}">{{this.[Review ID]}}</option>
         {{/each}}
     </select>
 
-    <td><button class="delete-btn" data-id="delete-review-button">Delete</button></td>  
-
+<button id="delete-review-submit">Delete</button>
 </form>
+</div>
+
+<br>
+
+<div>
+<h2>Search Reviews</h2>
+<p>To search for a review, please enter the information below and click 'Search'!</p>
+
+<form id="search-review-form-ajax">
+    <label for="search-name">Last Name: </label>
+    <input type="text" name="search-name" id="search-review-name">
+
+    <button id="search-review-submit">Search</button>
+    <button id="search-review-reset">Reset</button>
+</form>
+</div>
+
+<br>
+<br>
+<br>
+
+<script src="/js/review.js" type="text/javascript"></script>
+
+</div>
