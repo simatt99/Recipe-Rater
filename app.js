@@ -679,7 +679,7 @@ app.post('/delete-user', function(req, res) {
 app.post('/delete-recipe', function(req, res) {
     let data = req.body
 
-    let id = parseInt(data.id)
+    let id = req.body.recipeID
 
     let query = `DELETE FROM RecipeCategories WHERE recipeID = ?;`
     let query2 = `DELETE FROM RecipeIngredients WHERE recipeID = ?;`
