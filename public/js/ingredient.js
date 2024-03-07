@@ -106,7 +106,7 @@ async function deleteIngredient(id) {
             const textResponse = await response.text()
         }, networkError => console.log(networkError.message))
         
-        // window.location.href = baseUrl + "/Ingredients"
+        window.location.href = "/Ingredients"
     }
     catch (error) {
         console.error('Error:', error)
