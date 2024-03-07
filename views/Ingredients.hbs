@@ -4,14 +4,19 @@
 4 # used the base template but changed to fit my database
 5 # Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%204%20-%20Dynamically%20Displaying%20Data --}}
 
-{{!-- Create a table --}}
-<table>
+{{!-- Data: ingredientID, name, description, allergen --}}
 
-    {{!-- Header section --}}
+<div class="container-fluid">
+
+<br>
+
+<h1>Ingredients Page</h1>
+
+<br>
+
+<div>
+<table id="ingredients-table">
     <thead>
-
-        {{!-- For just the first row, we print each key of the row object as a header cell so we
-        know what each column means when the page renders --}}
         <tr>
             {{#each data.[0]}}
             <th>
@@ -21,83 +26,141 @@
         </tr>
     </thead>
 
-    {{!-- Body section --}}
     <tbody>
-
         {{#each data}}
-        <tr>
-            <td>{{this.ingredientID}}</td>
-            <td>{{this.name}}</td>
-            {{#if this.description}}
-                <td>{{this.description}}</td>
+        <tr data-value={{this.[Ingredient ID]}}>
+            <td>{{this.[Ingredient ID]}}</td>
+            <td>{{this.[Ingredient]}}</td>
+            {{#if this.[Description]}}
+                <td>{{this.[Description]}}</td>
             {{else}}
                 <td>NULL</td>
             {{/if}}
-            <td>{{this.allergen}}</td>       
+            <td>{{this.[Allergen?]}}</td>
+            {{!-- {{#if this.[Allergen?]}}
+                <td>True</td>
+            {{else}}
+                <td>False</td>
+            {{/if}}      --}}
         </tr>
         {{/each}}
     </tbody>
 </table>
+</div>
+
+<br>
 
 {{!-- 2 # Citation for the following html:
 2 # Date: 2/15/24
 3 # Adapted from Node.js - Node.js - Step 5 - Adding New Data
 4 # used the base template but changed to fit my database
 5 # Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data --}}
-{{!-- Form to add a record to the table  --}}
+
+<div>
 <h2>Add Ingredient</h2>
-<p>To add a new ingredients, please enter their information below and click 'Submit'!</p>
+<p>To add a new ingredient, please enter the information below and click 'Add'!</p>
 <p>Inputs with a * next to them are nullable and not required</p>
-<form id="add-ingredient">
 
-    <label for="name">Name:</label>
-    <input type="text" name="name" id="name">
-
-    <label for="description">*Description:</label>
-    <textarea name="description" id="description"></textarea>
-
-    <label for="allergen">Allergen (0 for no, 1 for yes):</label>
-    <input type="number" name="allergen" id="allergen" min="0" max="1">
-
-    <input type="submit">
+<form id="post-ingredient-form-ajax" class="row g-2">
+    <div class="col-auto">
+        <label for="post-ingredient-name" class="visually-hidden">Name</label>
+        <input type="text" id="post-ingredient-name" class="form-control" placeholder="Name">
+    </div>
+    <div class="col-auto">
+        <label for="post-ingredient-description" class="visually-hidden">*Description</label>
+        <textarea id="post-ingredient-description" class="form-control" placeholder="Description"></textarea>
+    </div>
+    <div class="col-auto">
+        <label for="post-ingredient-allergen" class="visually-hidden">Allergen (0 for no, 1 for yes)</label>
+        <input type="number" id="post-ingredient-allergen" class="form-control" placeholder="Allegen" min="0" max="1"></textarea>
+    </div>
+    <div class="col-auto">
+        <button id="post-ingredient-submit" class="btn mb-3 btn-secondary">Add</button>
+    </div>
 </form>
+</div>
 
+<br>
+
+<div>
 <h2>Edit Ingredient</h2>
-<p>To edit ingredients, please enter the information below and click 'Submit'!</p>
+<p>To edit an ingredient, please enter the information below and click 'Edit'!</p>
 <p>Inputs with a * next to them are nullable and not required</p>
-<form id="edit-ingredient">
 
-    <select name="ingredient-ID" id="ingredient-IDs">
-        <option value="">Select a ingredient</option>
-        {{#each data}}
-        <option value="{{this.ingredientID}}">{{this.ingredientID}}</option>
-        {{/each}}
-    </select>
-
-    <label for="ingredient-name">Name:</label>
-    <input type="text" name="ingredient-name" id="edit-ingredient-name">
-
-    <label for="edit-ingredient-description">*Description:</label>
-    <textarea name="edit-ingredient-description" id="edit-ingredient-description"></textarea>
-
-    <label for="edit-ingredient-allergen">Allergen (0 for no, 1 for yes):</label>
-    <input type="number" name="edit-ingredient-allergen" id="edit-ingredient-allergen" min="0" max="1">
-
-    <input type="submit">
+<form id="put-ingredient-form-ajax" class="row g2">
+    <div class="col-auto">
+    	<label for="put-ingredient-id" class="visually-hidden">Ingredient</label>
+    	<select id="put-ingredient-id" class="form-select">
+        	<option value="">Select an Ingredient</option>
+        	{{#each data}}
+        	<option value="{{this.[Ingredient ID]}}">{{this.[Ingredient]}}</option>
+        	{{/each}}
+    	</select>
+    </div>
+    <div class="col-auto">
+    	<label for="put-ingredient-name" class="visually-hidden">Name</label>
+    	<input type="text" id="put-ingredient-name" class="form-control" placeholder="Name">
+    </div>
+    <div class="col-auto">
+    	<label for="put-ingredient-description" class="visually-hidden">*Description</label>
+    	<textarea id="put-ingredient-description" class="form-control" placeholder="*Description"></textarea>
+    </div>
+    <div class="col-auto">
+    	<label for="put-ingredient-allergen" class="form-label">Allergen (0 for no, 1 for yes)</label>
+    	<input type="number" id="put-ingredient-allergen" min="0" max="1" class="form-control">
+    </div>
+    <div class="col-auto">
+    	<button id="put-ingredient-submit" class="btn mb-3 btn-secondary">Edit</button>
+    </div>
 </form>
+</div>
 
-<h2>Delete Ingredients</h2>
-<p>To Delete a Ingredient, please select its information below and click 'Delete'!</p>
-<form id="delete-ingredient">
+<br>
 
-    <select name="ingredient-ID" id="ingredient-IDs">
-        <option value="">Select a ingredient</option>
-        {{#each data}}
-        <option value="{{this.ingredientID}}">{{this.ingredientID}}</option>
-        {{/each}}
-    </select>
+<div>
+<h2>Delete Ingredient</h2>
+<p>To delete an ingredient, please enter the information below and click 'Delete'!</p>
 
-    <td><button class="delete-btn" data-id="delete-review-button">Delete</button></td>  
-
+<form id="delete-ingredient-form-ajax" class="row g-3">
+    <div class="col-auto">
+    	<label for="delete-ingredient-id" class="visually-hidden">Ingredient</label>
+    	<select id="delete-ingredient-id" class="form-select">
+        	<option value="">Select an Ingredient</option>
+        	{{#each data}}
+        	<option value="{{this.[Ingredient ID]}}">{{this.[Ingredient]}}</option>
+        	{{/each}}
+    	</select>
+    </div>
+    <div class="col-auto">
+    	<button id="delete-ingredient-submit" class="btn mb-3 btn-secondary">Delete</button>
+    </div>
 </form>
+</div>
 
+<br>
+
+<div>
+<h2>Search Ingredients</h2>
+<p>To search for an ingredient, please enter the information below and click 'Search'!</p>
+
+<form id="search-ingredient-form-ajax" class="row g-3">
+    <div class="col-auto">
+    	<label for="search-ingredient-name" class="visually-hidden">Name</label>
+    	<input type="text" id="search-ingredient-name" class="form-control" placeholder="Name">
+    </div>
+    <div class="col-auto">
+    	<button id="search-ingredient-submit" class="btn mb-3 btn-secondary">Search</button>
+    </div>
+    <div class="col-auto">
+    	<button id="search-ingredient-reset" class="btn mb-3 btn-secondary">Reset</button>
+    </div>
+</form>
+</div>
+
+<br>
+<br>
+<br>
+
+<script src="/js/ingredient.js" type="text/javascript"></script>
+
+</div>

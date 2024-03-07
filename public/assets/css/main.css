@@ -1,0 +1,13 @@
+body {
+    background-color: burlywood;
+}
+
+table {
+    width: 75%;
+    border-collapse: collapse;
+    border-color: black;
+    border-width: 25%;
+    border-style: solid;
+    /* background-color: black; */
+    margin-bottom: 20px;
+}

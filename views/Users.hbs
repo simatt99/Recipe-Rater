@@ -4,15 +4,15 @@
 4 # used the base template but changed to fit my database
 5 # Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%204%20-%20Dynamically%20Displaying%20Data --}}
 
+{{!-- Data: userID, firstName, lastName, email, joinDate --}}
 
-{{!-- Create a table --}}
-<table>
+<div class="container-fluid">
 
-    {{!-- Header section --}}
+<h1>Users Page</h1>
+
+<div>
+<table id="users-table">
     <thead>
-
-        {{!-- For just the first row, we print each key of the row object as a header cell so we
-        know what each column means when the page renders --}}
         <tr>
             {{#each data.[0]}}
             <th>
@@ -22,85 +22,129 @@
         </tr>
     </thead>
 
-    {{!-- Body section --}}
     <tbody>
-
-        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
         {{#each data}}
-        <tr>
-            <td>{{this.userID}}</td>
-            <td>{{this.firstName}}</td>
-            <td>{{this.lastName}}</td>
-            <td>{{this.email}}</td>
-            <td>{{this.joinDate}}</td>           
+        <tr data-value={{this.[User ID]}}>
+            <td>{{this.[User ID]}}</td>
+            <td>{{this.[First Name]}}</td>
+            <td>{{this.[Last Name]}}</td>
+            <td>{{this.[Email]}}</td>
+            <td>{{this.[Join Date]}}</td>           
         </tr>
         {{/each}}
     </tbody>
 </table>
+</div>
 
 {{!-- 2 # Citation for the following html:
 2 # Date: 2/15/24
 3 # Adapted from Node.js - Node.js - Step 5 - Adding New Data
 4 # used the base template but changed to fit my database
 5 # Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data --}}
-{{!-- Form to add a record to the table  --}}
+
+<div>
 <h2>Add User</h2>
-<p>To add a new User, please enter their information below and click 'Submit'!</p>
-<form id="add-user">
+<p>To add a new user, please enter the information below and click 'Add'!</p>
 
-    <label for="firstName">First Name:</label>
-    <input type="text" name="firstName" id="firstName">
-
-    <label for="lastName">Last Name:</label>
-    <input type="text" name="lastName" id="lastName">
-
-    <label for="email">Email:</label>
-    <input type="email" name="email" id="email">
-
-    <label for="joinDate">Join Date:</label>
-    <input type="date" name="joinDate" id="joinDate">
-
-    <input type="submit">
+<form id="post-user-form-ajax" class="row g-2">
+    <div class="col-auto">
+    	<label for="post-user-firstName" class="visually-hidden">First Name</label>
+    	<input type="text" id="post-user-firstName" class="form-control" placeholder="First Name">
+    </div>
+    <div class="col-auto">
+    	<label for="post-user-lastName" class="visually-hidden">Last Name</label>
+    	<input type="text" id="post-user-lastName" class="form-control" placeholder="Last Name">
+    </div>
+    <div class="col-auto">
+    	<label for="post-user-email" class="visually-hidden">Email</label>
+    	<input type="email" id="post-user-email" class="form-control" placeholder="Email">
+    </div>
+    <div class="col-auto">
+    	<label for="post-user-joinDate" class="form-label">Join Date:</label>
+    	<input type="date" id="post-user-joinDate" class="">
+    </div>
+    <div class="col-auto">
+    <button id="post-user-submit" class="btn mb-3 btn-secondary">Add</button>
+    </div>
 </form>
+</div>
 
+<div>
 <h2>Edit User</h2>
-<p>To edit a user, please enter their information below and click 'Submit'!</p>
-<form id="edit-user">
+<p>To edit a user, please enter the information below and click 'Edit'!</p>
 
-    <select name="recipe-ID" id="recipe-IDs">
-        <option value="">Select a User</option>
-        {{#each data}}
-        <option value="{{this.userID}}">{{this.userID}}</option>
-        {{/each}}
-    </select>
-
-    <label for="firstName">First Name:</label>
-    <input type="text" name="firstName" id="firstName">
-
-    <label for="lastName">Last Name:</label>
-    <input type="text" name="lastName" id="lastName">
-
-    <label for="email">Email:</label>
-    <input type="email" name="email" id="email">
-
-    <label for="joinDate">Join Date:</label>
-    <input type="date" name="joinDate" id="joinDate">
-
-    <input type="submit">
+<form id="put-user-form-ajax" class="row g-3">
+    <div class="col-auto">
+    	<label for="put-user-id" class="visually-hidden">User</label>
+    	<select id="put-user-id" class="form-select">
+        	<option value="">Select a User</option>
+        	{{#each data}}
+        	<option value="{{this.[User ID]}}">{{this.[User ID]}}</option>
+        	{{/each}}
+    	</select>
+    </div>
+    <div class="col-auto">
+    	<label for="put-user-firstName" class="visually-hidden">First Name</label>
+    	<input type="text" id="put-user-firstName" class="form-control" placeholder="First Name">
+    </div>
+    <div class="col-auto">
+    	<label for="put-user-lastName" class="visually-hidden">Last Name</label>
+    	<input type="text" id="put-user-lastName" class="form-control" placeholder="Last Name">
+    </div>
+    <div class="col-auto">
+    	<label for="put-user-email" class="visually-hidden">Email</label>
+    	<input type="email" id="put-user-email" class="form-control" placeholder="Email">
+    </div>
+    <div class="col-auto">
+    	<label for="put-user-joinDate" class="form-label">Join Date</label>
+    	<input type="date" id="put-user-joinDate" class="">
+    </div>
+    <div class="col-auto">
+    	<buton id="put-user-submit" class="btn mb-3 btn-secondary">Edit</button>
+    </div>
 </form>
+</div>
 
-</form>
+<div>
 <h2>Delete User</h2>
-<p>To Delete a User, please select their ID below and click 'Delete'!</p>
-<form id="delete-review">
+<p>To delete a user, please enter the information below and click 'Delete'!</p>
 
-    <select name="recipe-ID-deleter" id="recipe-IDs-delete">
-        <option value="">UserID</option>
-        {{#each data}}
-        <option value="{{this.userID}}">{{this.userID}}</option>
-        {{/each}}
-    </select>
-
-    <td><button class="delete-btn" data-id="delete-review-button">Delete</button></td>  
-
+<form id="delete-user-form-ajax" class="row g-3">
+    <div class="col-auto">
+    	<label for="delete-user-id" class="visually-hidden">User</label>
+    	<select id="delete-user-id" class="form-select">
+        	<option value="">Select a User</option>
+        	{{#each data}}
+        	<option value="{{this.[User ID]}}">{{this.[User ID]}}</option>
+        	{{/each}}
+    	</select>
+    </div>
+    <div class="col-auto">
+    	<button id="delete-user-submit" class="btn mb-3 btn-secondary">Delete</button>
+    </div>
 </form>
+</div>
+
+<div>
+<h2>Search Users</h2>
+<p>To search for a user, please enter the information below and click 'Search'!</p>
+
+<form id="search-user-form-ajax">
+    <div class="col-auto">
+    <label for="search-user-lastName" class="visually-hidden">Last Name</label>
+    <input type="text" id="search-user-lastName" class="form-control" placeholder="Last Name">
+    </div>
+    <div class="col-auto">
+    	<button id="search-user-submit" class="btn mb-3 btn-warning">Search</button>
+    	<button id="search-user-reset" class="btn mb-3 btn-warning">Reset</button>
+    </div>
+</form>
+</div>
+
+<br>
+<br>
+<br>
+
+<script src="/js/user.js" type="text/javascript"></script>
+
+</div>
