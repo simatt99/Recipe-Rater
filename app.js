@@ -718,8 +718,8 @@ app.post('/delete-recipe', function(req, res) {
 })
 
 app.post('/delete-review', function(req, res) {
-    let data = req.body
-    let id = parseInt(data.id)
+
+    let id = req.body.reviewID
     let query = `DELETE FROM Reviews WHERE reviewID = ?;`
 
     db.pool.query(query, [id], function(error, rows, fields) {
