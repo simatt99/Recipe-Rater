@@ -644,9 +644,9 @@ app.post('/delete-category', function(req, res) {
 })
 
 app.post('/delete-user', function(req, res) {
-    let data = req.body
 
-    let id = parseInt(data.id)
+
+    let id = req.body.userID
 
     let query = `DELETE FROM Reviews WHERE userID = ?;`
     let query2 = `DELETE FROM Recipes WHERE userID = ?;`
