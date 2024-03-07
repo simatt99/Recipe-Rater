@@ -92,7 +92,7 @@ async function deleteRecipeCategory(id) {
             const textResponse = await response.text()
         }, networkError => console.log(networkError.message))
         
-        // window.location.href = baseUrl + "/RecipeCategories"
+        window.location.href = "/RecipeCategories"
     }
     catch (error) {
         console.error('Error:', error)
