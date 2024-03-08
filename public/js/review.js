@@ -98,7 +98,7 @@ async function deleteReview(id) {
             const textResponse = await response.text()
         }, networkError => console.log(networkError.message))
         
-        // window.location.href = baseUrl + "/Reviews"
+        window.location.href = "/Reviews"
     }
     catch (error) {
         console.error('Error:', error)

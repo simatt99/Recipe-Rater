@@ -96,7 +96,7 @@ async function deleteUser(id) {
             const textResponse = await response.text()
         }, networkError => console.log(networkError.message))
         
-        // window.location.href = baseUrl + "/Users"
+        window.location.href = "/Users"
     }
     catch (error) {
         console.error('Error:', error)
