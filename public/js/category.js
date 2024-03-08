@@ -28,7 +28,7 @@ async function postCategory(name2) {
                 const textResponse = await response.text()
             }, networkError => console.log(networkError.message))
             
-            // window.location.href = baseUrl + "/Categories";
+            window.location.href = "/Categories"
         }
         catch (error) {
             console.error('Error:', error);
@@ -60,7 +60,7 @@ async function putCategory(id, name2) {
                 const textResponse = await response.text()
             }, networkError => console.log(networkError.message))
             
-            // window.location.href = baseUrl + "/Categories";
+            window.location.href = "/Categories"
         }
         catch (error) {
             console.error('Error:', error)
@@ -90,7 +90,7 @@ async function deleteCategory(id) {
             const textResponse = await response.text()
         }, networkError => console.log(networkError.message))
         
-        // window.location.href = baseUrl + "/Categories"
+        window.location.href = "/Categories"
     }
     catch (error) {
         console.error('Error:', error)

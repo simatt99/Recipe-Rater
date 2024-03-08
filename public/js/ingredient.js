@@ -36,7 +36,7 @@ async function postIngredient(name2, description2, allergen2) {
                 const textResponse = await response.text()
             }, networkError => console.log(networkError.message))
             
-            // window.location.href = baseUrl + "/Ingredients";
+            window.location.href = "/Ingredients"
         }
         catch (error) {
             console.error('Error:', error);
@@ -76,7 +76,7 @@ async function putIngredient(id, name2, description2, allergen2) {
                 const textResponse = await response.text()
             }, networkError => console.log(networkError.message))
             
-            // window.location.href = baseUrl + "/Ingredients";
+            window.location.href = "/Ingredients"
         }
         catch (error) {
             console.error('Error:', error)
@@ -106,7 +106,7 @@ async function deleteIngredient(id) {
             const textResponse = await response.text()
         }, networkError => console.log(networkError.message))
         
-        // window.location.href = baseUrl + "/Ingredients"
+        window.location.href = "/Ingredients"
     }
     catch (error) {
         console.error('Error:', error)

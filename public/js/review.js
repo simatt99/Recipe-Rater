@@ -32,7 +32,7 @@ async function postReview(recipeID2, userID2, datePosted2, rating2, comment2) {
                 const textResponse = await response.text()
             }, networkError => console.log(networkError.message))
             
-            // window.location.href = baseUrl + "/Reviews";
+            window.location.href = "/Reviews"
         }
         catch (error) {
             console.error('Error:', error);
@@ -68,7 +68,7 @@ async function putReview(id, recipeID2, userID2, datePosted2, rating2, comment2)
                 const textResponse = await response.text()
             }, networkError => console.log(networkError.message))
             
-            // window.location.href = baseUrl + "/Reviews";
+            window.location.href = "/Reviews"
         }
         catch (error) {
             console.error('Error:', error)
@@ -98,7 +98,7 @@ async function deleteReview(id) {
             const textResponse = await response.text()
         }, networkError => console.log(networkError.message))
         
-        // window.location.href = baseUrl + "/Reviews"
+        window.location.href = "/Reviews"
     }
     catch (error) {
         console.error('Error:', error)

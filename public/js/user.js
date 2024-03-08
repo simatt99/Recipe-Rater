@@ -31,7 +31,7 @@ async function postUser(firstName2, lastName2, email2, joinDate2) {
                 const textResponse = await response.text()
             }, networkError => console.log(networkError.message))
             
-            // window.location.href = baseUrl + "/Users";
+            window.location.href = "/Users"
         }
         catch (error) {
             console.error('Error:', error);
@@ -66,7 +66,7 @@ async function putUser(id, firstName2, lastName2, email2, joinDate2) {
                 const textResponse = await response.text()
             }, networkError => console.log(networkError.message))
             
-            // window.location.href = baseUrl + "/Users";
+            window.location.href = "/Users"
         }
         catch (error) {
             console.error('Error:', error)
@@ -96,7 +96,7 @@ async function deleteUser(id) {
             const textResponse = await response.text()
         }, networkError => console.log(networkError.message))
         
-        // window.location.href = baseUrl + "/Users"
+        window.location.href = "/Users"
     }
     catch (error) {
         console.error('Error:', error)

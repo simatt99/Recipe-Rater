@@ -50,24 +50,28 @@
 <h2>Add RecipeIngredient</h2>
 <p>To add new recipeIngredient, please enter the information below and click 'Add'!</p>
 
-<form id="post-recipeIngredient-form-ajax">
-    <label for="post-select-recipe">Recipe: </label>
-    <select name="post-select-recipe" id="post-recipeIngredient-recipe">
-        <option value="">Select a Recipe</option>
-        {{#each recipes}}
-        <option value="{{this.recipeID}}">{{this.name}}</option>
-        {{/each}}
+<form id="post-recipeIngredient-form-ajax" class="row g-3">
+    <div class="col-auto">
+        <label for="post-select-recipe" class="visually-hidden">Recipe</label>
+        <select name="post-select-recipe" id="post-recipeIngredient-recipe" class="form-select">
+            <option value="">Select a Recipe</option>
+            {{#each recipes}}
+            <option value="{{this.recipeID}}">{{this.name}}</option>
+            {{/each}}
+        </select>
+    </div>
+    <div class="col-auto">
+        <label for="post-select-ingredient" class="visually-hidden">Ingredient</label>
+        <select name="post-select-ingredient" id="post-recipeIngredient-ingredient" class="form-select">
+            <option value="">Select an Ingredient</option>
+            {{#each ingredients}}
+            <option value="{{this.ingredientID}}">{{this.name}}</option>
+            {{/each}}
     </select>
-
-    <label for="post-select-ingredient">Ingredient: </label>
-    <select name="post-select-ingredient" id="post-recipeIngredient-ingredient">
-        <option value="">Select an Ingredient</option>
-        {{#each ingredients}}
-        <option value="{{this.ingredientID}}">{{this.name}}</option>
-        {{/each}}
-    </select>
-
-    <button id="post-recipeIngredient-submit">Add</button>
+    </div>
+    <div class="col-auto">
+        <button id="post-recipeIngredient-submit" class="btn mb-3 btn-secondary">Add</button>
+    </div>
 </form>
 </div>
 
@@ -77,32 +81,37 @@
 <h2>Edit RecipeIngredient</h2>
 <p>To edit recipeIngredients, please enter the information below and click 'Edit'!</p>
 
-<form id="put-recipeIngredient-form-ajax">
-    <label for="put-select-id">RecipeIngredient: </label>
-    <select name="put-select-id" id="put-recipeIngredient-id">
-        <option value="">Select a RecipeIngredient</option>
-        {{#each data}}
-        <option value="{{this.[RecipeIngredient ID]}}">{{this.[RecipeIngredient ID]}}</option>
-        {{/each}}
+<form id="put-recipeIngredient-form-ajax" class="row g-3">
+    <div class="col-auto">
+        <label for="put-recipeIngredient-id" class="visually-hidden">RecipeIngredient</label>
+        <select id="put-recipeIngredient-id" class="form-select">
+            <option value="">Select a RecipeIngredient</option>
+            {{#each data}}
+            <option value="{{this.[RecipeIngredient ID]}}">{{this.[RecipeIngredient ID]}}</option>
+            {{/each}}
+        </select>
+    </div>
+    <div class="col-auto">
+        <label for="put-recipeIngredient-recipe" class="visually-hidden">Recipe</label>
+        <select id="put-recipeIngredient-recipe" class="form-select">
+            <option value="">Select a Recipe</option>
+            {{#each recipes}}
+            <option value="{{this.recipeID}}">{{this.name}}</option>
+            {{/each}}
+        </select>
+    </div>
+    <div class="col-auto">
+        <label for="put-recipeIngredient-ingredient" class="visually-hidden">Ingredient</label>
+        <select id="put-recipeIngredient-ingredient" class="form-select">
+            <option value="">Select an Ingredient</option>
+            {{#each ingredients}}
+            <option value="{{this.ingredientID}}">{{this.name}}</option>
+            {{/each}}
     </select>
-
-    <label for="put-select-recipe">Recipe: </label>
-    <select name="put-select-recipe" id="put-recipeIngredient-recipe">
-        <option value="">Select a Recipe</option>
-        {{#each recipes}}
-        <option value="{{this.recipeID}}">{{this.name}}</option>
-        {{/each}}
-    </select>
-
-    <label for="put-select-ingredient">Ingredient: </label>
-    <select name="put-select-ingredient" id="put-recipeIngredient-ingredient">
-        <option value="">Select an Ingredient</option>
-        {{#each ingredients}}
-        <option value="{{this.ingredientID}}">{{this.name}}</option>
-        {{/each}}
-    </select>
-
-    <button id="put-recipeIngredient-submit">Edit</button>
+    </div>
+    <div class="col-auto">
+        <button id="put-recipeIngredient-submit" class="btn mb-3 btn-secondary">Edit</button>
+    </div>
 </form>
 </div>
 
@@ -112,16 +121,19 @@
 <h2>Delete RecipeIngredient</h2>
 <p>To delete a recipeIngredient, please enter the information below and click 'Delete'!</p>
 
-<form id="delete-recipeIngredient-form-ajax">
-    <label for="delete-select-id">RecipeIngredient: </label>
-    <select name="delete-select-id" id="delete-recipeIngredient-id">
-        <option value="">Select a RecipeIngredient</option>
-        {{#each data}}
-        <option value="{{this.[RecipeIngredient ID]}}">{{this.[RecipeIngredient ID]}}</option>
-        {{/each}}
-    </select>
-
- <button id="delete-recipeIngredient-submit">Delete</button>
+<form id="delete-recipeIngredient-form-ajax" class="row g-3">
+    <div class="col-auto">
+        <label for="delete-recipeIngredient-id" class="visually-hidden">RecipeIngredient</label>
+        <select id="delete-recipeIngredient-id" class="form-select">
+            <option value="">Select a RecipeIngredient</option>
+            {{#each data}}
+            <option value="{{this.[RecipeIngredient ID]}}">{{this.[RecipeIngredient ID]}}</option>
+            {{/each}}
+        </select>
+    </div>
+    <div class="col-auto">
+        <button id="delete-recipeIngredient-submit" class="btn mb-3 btn-secondary">Delete</button>
+    </div>
 </form>
 </div>
 

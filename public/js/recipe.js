@@ -34,7 +34,7 @@ async function postRecipe(name2, description2, userID2, datePosted2, instruction
                 const textResponse = await response.text()
             }, networkError => console.log(networkError.message))
             
-            // window.location.href = baseUrl + "/Recipes";
+            window.location.href = "/Recipes"
         }
         catch (error) {
             console.error('Error:', error);
@@ -72,7 +72,7 @@ async function putRecipe(id, name2, description2, userID2, datePosted2, instruct
                 const textResponse = await response.text()
             }, networkError => console.log(networkError.message))
             
-            // window.location.href = baseUrl + "/Recipes";
+            window.location.href = "/Recipes"
         }
         catch (error) {
             console.error('Error:', error)
@@ -102,7 +102,7 @@ async function deleteRecipe(id) {
             const textResponse = await response.text()
         }, networkError => console.log(networkError.message))
         
-        // window.location.href = baseUrl + "/Recipes"
+        window.location.href = "/Recipes"
     }
     catch (error) {
         console.error('Error:', error)

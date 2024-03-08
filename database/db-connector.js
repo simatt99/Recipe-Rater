@@ -6,13 +6,14 @@
 
 // Get an instance of mysql we can use in the app
 var mysql = require('mysql')
-
+var username = process.env.DB_USER
+var pass = process.env.DB_PASS
 // Create a 'connection pool' using the provided credentials
 var pool = mysql.createPool({
     connectionLimit : 10,
     host            : 'classmysql.engr.oregonstate.edu',
-    user            : 'cs340_simoesm',
-    password        : '3429',
+    user            : username,
+    password        : pass,
     database        : 'cs340_simoesm'
 })
 
